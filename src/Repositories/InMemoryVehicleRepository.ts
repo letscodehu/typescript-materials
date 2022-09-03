@@ -4,7 +4,7 @@ import VehicleRepository from "./VehicleRepository";
 
 export default class InMemoryVehicleRepository implements VehicleRepository {
 
-    private map : Map<string, Vehicle> = new Map<string, Vehicle>();
+    private map: Map<string, Vehicle> = new Map<string, Vehicle>();
 
     add(name: string, licensePlate: string): Vehicle {
         const id = randomUUID();
@@ -12,11 +12,21 @@ export default class InMemoryVehicleRepository implements VehicleRepository {
         this.map.set(id, vehicle);
         return vehicle;
     }
-    remove(id: string): boolean {
-        throw new Error("Method not implemented.");
+    remove(id: string | Vehicle): boolean {
+        if (typeof id === 'string') {
+            return this.removeById(id);
+        } else {
+            return this.removeByObject(id as Vehicle);
+        }
     }
-    find(id: string): Vehicle {
-        throw new Error("Method not implemented.");
+    private removeById(id: string) {
+        return this.map.delete(id);
+    }
+    private removeByObject(vehicle: Vehicle) {
+        return this.map.delete(vehicle.id)
+    }
+    find(id: string): Vehicle | undefined {
+        return this.map.get(id);
     }
     list(): Vehicle[] {
         return [... this.map.values()];

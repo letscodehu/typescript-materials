@@ -1,9 +1,9 @@
 import Fuelup from "./Fuelup";
 
 export default class Vehicle {
-    private readonly name: string;
-    private readonly id: string;
-    private readonly licensePlate: string;
+    public readonly name: string;
+    public readonly id: string;
+    public readonly licensePlate: string;
     private readonly fuelups: Fuelup[];
 
     constructor(id: string, name: string, licensePlate: string, fuelups: Fuelup[]) {
