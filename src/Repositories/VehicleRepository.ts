@@ -1,9 +1,10 @@
+import UUID from "../Entities/UUID";
 import Vehicle from "../Entities/Vehicle";
 
 export default interface VehicleRepository {
     add(name: string, licensePlate: string) : Vehicle;
-    remove(id: string | Vehicle) : boolean;
-    find(id: string): Vehicle | undefined;
+    remove(id: UUID | Vehicle) : boolean;
+    find(id: UUID): Vehicle | undefined;
     list() : Vehicle[];
     update(vehicle: Vehicle) : Vehicle;
 }
