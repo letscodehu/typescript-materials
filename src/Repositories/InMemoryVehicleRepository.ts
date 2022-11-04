@@ -32,28 +32,8 @@ export default class InMemoryVehicleRepository implements VehicleRepository {
         return [... this.map.values()];
     }
     update(vehicle: Vehicle): Vehicle {
-        throw new Error("Method not implemented.");
+        this.map.set(vehicle.id, vehicle);
+        return vehicle;
     }
 
 }
-
-class Pair<Key, Value> {
-    private key : Key;
-    private value : Value;
-    constructor(key : Key, value: Value) {
-        this.key = key;
-        this.value = value;
-    }
-
-    getKey() : Key {
-        return this.key
-    }
-
-    getValue() : Value {
-        return this.value
-    }
-}
-
-let p = new Pair<string, number>("5", 6);
-let val : number = p.getValue();
-let key : string = p.getKey();

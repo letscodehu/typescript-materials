@@ -1,4 +1,5 @@
 import {describe, beforeEach, expect, test} from '@jest/globals'
+import Fuelup from '../src/Entities/Fuelup';
 import Vehicle from '../src/Entities/Vehicle';
 import InMemoryVehicleRepository from '../src/Repositories/InMemoryVehicleRepository'
 
@@ -31,6 +32,32 @@ describe('vehicle repository', () => {
             const created = underTest.add("car", "AAAA-001");
             underTest.remove(created);
             expect(underTest.list().length).toBe(0);
+        })
+    })
+    describe('update', () => {
+        test('license plate can be updated', () => {
+            const created = underTest.add("car", "AAAA-001");
+            const updated = created.changeLicensePlate("BBBB-001");
+            underTest.update(updated);
+            const found = underTest.find(created.id) as Vehicle;
+            expect(found.licensePlate).toBe("BBBB-001");
+        })
+
+        test('name can be updated', () => {
+            const created = underTest.add("car", "AAAA-001");
+            const updated = created.changeName("other car");
+            underTest.update(updated);
+            const found = underTest.find(created.id) as Vehicle;
+            expect(found.name).toBe("other car");
+        })
+
+        test('fuelups can be updated', () => {
+            const created = underTest.add("car", "AAAA-001");
+            const fuelups = [new Fuelup(new Date, 4800, 10, 240000)];
+            const updated = created.changeFuelups(fuelups);
+            underTest.update(updated);
+            const found = underTest.find(created.id) as Vehicle;
+            expect(found.fuelups()).toStrictEqual(fuelups);
         })
     })
 })
