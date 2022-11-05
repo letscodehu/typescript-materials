@@ -1,8 +1,8 @@
 export default class Fuelup {
-    private readonly time: Date;
-    private readonly price: number;
-    private readonly amount: number;
-    private readonly mileage: number;
+    public readonly time: Date;
+    public readonly price: number;
+    public readonly amount: number;
+    public readonly mileage: number;
 
     constructor(time: Date, price: number, amount: number, mileage: number) {
         this.time = time;
