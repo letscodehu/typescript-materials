@@ -1,5 +1,6 @@
 import {describe, beforeEach, expect, test} from '@jest/globals'
 import Fuelup from '../src/Entities/Fuelup';
+import UUID from '../src/Entities/UUID';
 import Vehicle from '../src/Entities/Vehicle';
 import InMemoryVehicleRepository from '../src/Repositories/InMemoryVehicleRepository'
 
@@ -53,7 +54,7 @@ describe('vehicle repository', () => {
 
         test('fuelups can be updated', () => {
             const created = underTest.add("car", "AAAA-001");
-            const fuelups = [new Fuelup(new Date, 4800, 10, 240000)];
+            const fuelups = [new Fuelup(new UUID, new Date, 4800, 10, 240000)];
             const updated = created.changeFuelups(fuelups);
             underTest.update(updated);
             const found = underTest.find(created.id) as Vehicle;

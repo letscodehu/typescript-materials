@@ -36,7 +36,16 @@ export default class Vehicle {
     }
     addFuelup(price: number, amount: number, mileage: number): Vehicle {
         const fuelups = this.fuelups();
-        fuelups.push(new Fuelup(new Date, price, amount, mileage));
+        fuelups.push(new Fuelup(new UUID, new Date, price, amount, mileage));
+        return this.changeFuelups(fuelups);
+    }
+
+    removeFuelup(deleted: Fuelup): Vehicle {
+        const fuelups = this.fuelups().filter(f => f.id !== deleted.id);
+        return this.changeFuelups(fuelups)
+    }
+    updateFuelup(changed: Fuelup): Vehicle {
+        const fuelups = this.fuelups().map(fuelup => fuelup.id == changed.id ? changed : fuelup);
         return this.changeFuelups(fuelups);
     }
 }
